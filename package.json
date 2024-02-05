@@ -4,7 +4,7 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "dev": "nodemon ./src/main.js",
+    "dev": "node-dev ./src/main.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "keywords": [],
@@ -13,8 +13,8 @@
   "dependencies": {
     "dotenv": "^16.4.1",
     "koa": "^2.13.4",
-    "koa-bodyparser": "^4.3.0",
+    "koa-body": "^6.0.1",
     "koa-router": "^10.1.1",
-    "nodemon": "^3.0.3"
+    "node-dev": "^8.0.0"
   }
 }

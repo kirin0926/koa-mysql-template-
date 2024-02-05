@@ -1,6 +1,4 @@
 // 最主要的功能是启动一个http服务 和业务进行分开
-
-
 const { APP_PORT } = require('./config/config.default');//添加动态端口
 
 const app = require('./app');

@@ -1,15 +1,11 @@
-const Koa = require('koa');
+// 最主要的功能是启动一个http服务 和业务进行分开
 
-const Router = require('koa-router');
 
-const app = new Koa();
+const { APP_PORT } = require('./config/config.default');//添加动态端口
 
-app.use((ctx,next)=>{
-    //ctx 记录了所有app的上下文
-    ctx.body = 'hello api worlds';
+const app = require('./app');
 
-})
-
-app.listen(3000,()=>{
-    console.log('server is running at http://localhost:3000');
+// 监听
+app.listen( APP_PORT ,()=>{
+    console.log(`server is running at http://localhost:${APP_PORT}`);
 });

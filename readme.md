@@ -15,3 +15,7 @@ git log 查看提交日志
 git reset --hard HEAD^ 回退到上一个版本
 git reset --hard 版本号 回退到指定版本
 
+
+2 读取配置文件
+npm install dotenv or yarn add dotenv
+require('dotenv').config()

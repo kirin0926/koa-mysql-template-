@@ -1,5 +1,4 @@
 // #操作数据库
-
 // 导入数据库模块
 const User = require('../model/user.model');
 

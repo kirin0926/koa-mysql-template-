@@ -23,4 +23,5 @@ dotenv.config({ path: './.env' });
 // module.exports = {
 //     port: process.env.APP_PORT,
 // }
+// console.log(process.env)
 module.exports = process.env

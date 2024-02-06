@@ -8,10 +8,12 @@
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "keywords": [],
-  "author": "",
+  "author": "JJ",
   "license": "ISC",
   "dependencies": {
+    "bcryptjs": "^2.4.3",
     "dotenv": "^16.4.1",
+    "jsonwebtoken": "^9.0.2",
     "koa": "^2.13.4",
     "koa-body": "^6.0.1",
     "koa-router": "^10.1.1",

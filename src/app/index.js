@@ -16,4 +16,6 @@ app.use(userRouter.routes()); //注册路由
 
 // 统一的错误处理
 app.on('error',errHandler)
+
+// 最后导出
 module.exports =app;

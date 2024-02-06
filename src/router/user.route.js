@@ -2,8 +2,8 @@
 // 路由： 解析url 分发给控制器对应的方法
 // 控制器： 用来处理具体的业务
 const Router = require('koa-router');
-
-const { register,login } = require('../controller/user.controller');
+const { userValidator , verifyUser } = require('../middleware/user.middleware');// 操作器之行前要先校验数据是否正确
+const { register , login } = require('../controller/user.controller'); //登陆注册接口 控制器操作数据库内容
 
 const router = new Router({prefix: '/users'});
 
@@ -13,8 +13,8 @@ router.get('/', async (ctx, next) => {
   ctx.body = 'User list hello';
 })
  
-
-router.post('/register', register);// 注册接口
+// verifyUser
+router.post('/register',userValidator,verifyUser, register);// 注册接口 先使用userValidator 中间件验证 通过后再执行注册 控制器操作
 router.post('/login', login);// 登陆接口
 
 module.exports = router;

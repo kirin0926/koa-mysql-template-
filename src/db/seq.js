@@ -15,11 +15,11 @@ const seq = new Sequelize(MYSQL_DB, MYSQL_USER, MYSQL_PASSWORD, {
 })
 
 // 测试链接是否成功
-seq.authenticate().then(()=>{
-  console.log('数据库连接成功')  
-}).catch(err=>{
-    console.log('数据库连接失败',err)
-})
+// seq.authenticate().then(()=>{
+//   console.log('数据库连接成功')  
+// }).catch(err=>{
+//     console.log('数据库连接失败',err)
+// })
 
 // 导出
 module.exports = seq;

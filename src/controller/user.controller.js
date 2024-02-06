@@ -1,47 +1,37 @@
-const { createUser,getUserInfo } = require('../service/user.service');
+const { createUser } = require('../service/user.service');  //服务器创建用户
+
+const {userRegisterError} = require('../constant/err.type');    //导入错误类型
 
 class UserController {
     
     async register(ctx, next) {
+
         // 1.获取数据
         // console.log(ctx.request);
-        const {user_name,password} = ctx.request.body
-
-            //合法性 格式最起码得对的
-            if (!user_name || !password) {
-                console.error('用户名或密码为空',ctx.request.body)
-                ctx.status = 400;
-                ctx.body = {
-                    code: '10001',
-                    message: '用户名或密码为空',
-                    result: ''
-                }
-                return
-            }
-            //合理性
-            if(await getUserInfo(user_name)){
-                ctx.status = 409;
-                ctx.body = {
-                    code: '10002',
-                    message: '用户已经存在',
-                    result: ''
-                }
-                return
-            }
+        const {user_name,password} = ctx.request.body;
+ 
         // 2.操作数据库
-        const res = await createUser(user_name,password);
-        console.log(res)
+        try{
+            const res = await createUser(user_name,password);
+            console.log(res)
 
-        // 3.返回结果
-        ctx.body = {
-            code:0,
-            message:'register ok',
-            result:{
-                id:res.id,
-                user_name:res.user_name
-            }
-        };
-        // ctx.body = ctx.request.body;
+            // 3.返回结果
+            ctx.body = {
+                code:0,
+                message:'register ok',
+                result:{
+                    id:res.id,
+                    user_name:res.user_name
+                }
+            };
+            // ctx.body = ctx.request.body;
+        }catch(err){
+            // 当写入数据库错误的时候 catch捕捉到错误  并且抛出错误
+            // 服务器内部操作数据库出现的错误
+            console.error(err);
+            ctx.app.emit('error',userRegisterError,ctx);
+        }
+        
     }
 
     async login(ctx, next) {

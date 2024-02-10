@@ -7,6 +7,7 @@ const Router = require('koa-router');
 
 // 操作器之行前要先校验数据是否正确
 const { userValidator , verifyUser ,cryptPassword , verifyLogin } = require('../middleware/user.middleware');
+const { auth } = require('../middleware/auth.middleware');
 
 // 登陆注册接口 控制器操作数据库内容
 const { register , login } = require('../controller/user.controller'); 
@@ -20,10 +21,19 @@ router.get('/', async (ctx, next) => {
   ctx.body = 'User list hello';
 })
  
-// 中间件   userValidator用户名密码是否存在   verifyUser用户是否注册  cryptPassword用户密码加密
+// 注册接口   中间件   userValidator用户名密码是否存在   verifyUser用户是否注册  cryptPassword用户密码加密
 router.post('/register',userValidator,verifyUser,cryptPassword, register);// 注册接口 先使用userValidator 中间件验证 通过后再执行注册 控制器操作
 
-// 登陆接口   
+// 登陆接口
 router.post('/login',userValidator,verifyLogin, login);
+
+// 修改密码接口
+router.patch('/',auth, async (ctx, next) => {
+  // 校验token
+  console.log(ctx.state.user)
+  ctx.body = {
+    msg:'修改密码成功'
+};
+})
 
 module.exports = router;

@@ -50,6 +50,7 @@ class UserController {
                 code:0,
                 message:"login ok",
                 result:{
+                    // expiresIn 过期时间 1d = 1天      10 = 10秒过期
                     token:jwt.sign(res,JWT_SECRET_KEY,{expiresIn:'1d'}),
                 }
             };

@@ -79,6 +79,7 @@ const verifyLogin = async (ctx,next)=>{
             console.error('密码错误',{password});
             return ctx.app.emit('error' , invalidUserPasswordError , ctx);
         }
+        // 3.验证成功之后执行下一步
         await next();
     }catch(err){
         console.error('验证中间件登录失败',err);

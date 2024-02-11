@@ -37,9 +37,54 @@ module.exports = {
         message:'token过期',
         result:''
     },
+    tokenError:{
+        code:'10102',
+        message:'token错误',
+        result:''
+    },
+    tokenNotAuthorizationHeader:{
+        code:'10103',
+        message:'token未在请求头中',
+        result:''
+    },
     invalidToken:{
         code:'10102',
         message:'无效的token',
+        result:''
+    },
+    hasNotAdminPermission:{
+        code:'10103',
+        message:'该用户没有管理员权限',
+        result:''
+    },
+    fileUploadError:{
+        code:'10201',
+        message:'文件上传失败',
+        result:''
+    },
+    unSupportedFileType:{
+        code:'10202',
+        message:'不支持的文件类型',
+        result:''
+    },
+    goodsFormatError:{
+        code:'10203',
+        message:'商品格式错误',
+        result:''
+    },
+    createGoodsError:{
+        code:'10204',
+        message:'创建商品失败',
+        result:''
+    },
+    updateGoodsError:{
+        code:'10205',
+        message:'更新商品失败',
+        result:''
+    },
+    invalidGoodsIDError:{
+        code:'10206',
+        message:'无效的商品ID',
         result:''
     }
 }

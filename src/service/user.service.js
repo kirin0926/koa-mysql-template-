@@ -4,8 +4,6 @@ const User = require('../model/user.model');
 
 // 主要是操作数据库 增删改查 async 数据库操作是异步的
 class UserService {
-
-
         // 超过3个之后可以用对象来传递
     async createUser(user_name, password) {
         //todo 写入数据库 ,根据写入数据库的结果返回成功或者失败
@@ -19,11 +17,8 @@ class UserService {
         //   password:password,
         // }) 
         // 可以简写 如果表的字段和传递的值是一样的话
-
         // await 和asyc 是什么意思 区别console.log('user.service.js');
         // await 等待的意思 是一个表达式 返回值是promise对象的值 promise有两个重要的属性 value 和state状态
-
-        
     }
 
     async getUserInfo({id,user_name,password,is_admin}) {

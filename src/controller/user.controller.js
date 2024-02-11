@@ -70,6 +70,8 @@ class UserController {
 
         // 2.操作数据库
         if(await updateById({id,password})){
+
+        // 3.返回结果
             ctx.body = {
                 code:0,
                 message:'修改密码成功',
@@ -87,7 +89,6 @@ class UserController {
             // 判断用户是否存在 根据id修改password
             // const result = await updateById(id,password);
         // }
-        // 3.返回结果
     }
 
 }

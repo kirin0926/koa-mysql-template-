@@ -6,7 +6,7 @@ const { auth,hasAdminPermission } = require('../middleware/auth.middleware');
 const { validator, } = require('../middleware/goods.middleware');
 
 // 商品上传接口 控制器操作数据库内容
-const {upload,createGoods,updateGoods} = require('../controller/goods.controller');
+const {upload,createGoods,updateGoods,removeGoods} = require('../controller/goods.controller');
 
 // 路由配置默认地址
 const router = new Router({prefix: '/goods'});
@@ -19,6 +19,9 @@ router.post('/creategoods' , auth , hasAdminPermission , validator , createGoods
 
 // 修改商品接口     validate参数的校验
 router.put('/:id', auth , hasAdminPermission , validator , updateGoods);
+
+// 硬删除商品接口
+router.delete('/:id', auth , hasAdminPermission , removeGoods);
 
 // 导出
 module.exports = router;

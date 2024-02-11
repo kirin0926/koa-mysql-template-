@@ -1,16 +1,14 @@
+// 引用nodejs核心模块
 const path = require('path');
-
-const { fileUploadError,unSupportedFileType,createGoodsError,updateGoodsError,invalidGoodsIDError }=require('../constant/err.type');
-
-// const ApiError = require('../middleware/error');
-
-const { createGoods,updateGoods } = require('../service/goods.service');
-const { error } = require('console');
+// 错误编码模块
+const { fileUploadError,unSupportedFileType,createGoodsError,updateGoodsError,invalidGoodsIDError,removeGoodsError }=require('../constant/err.type');
+// 操作数据库service层
+const { createGoods,updateGoods,removeGoods } = require('../service/goods.service');
 
 class GoodsController{
 
     // 通用模块，文件上传，图片上传，头像，各种文件 word 表格
-    async upload(ctx,next){
+    async upload(ctx){
         //...upload logic
         // console.log(ctx.request.files);
         const file = ctx.request.files['file'];
@@ -47,7 +45,7 @@ class GoodsController{
     }
 
     // 发布商品接口
-    async createGoods(ctx,next){
+    async createGoods(ctx){
         try {
             const {createdAt,updatedAt,...res} = await createGoods(ctx.request.body);
             // 返回客户端
@@ -63,7 +61,7 @@ class GoodsController{
     }
 
     // 修改商品接口
-    async updateGoods(ctx,next){
+    async updateGoods(ctx){
         // 具体修改的是哪一件商品
         // put 方法
         try {
@@ -84,6 +82,23 @@ class GoodsController{
             return ctx.app.emit('error',updateGoodsError,ctx)
         }
 
+    }
+
+    // 硬删除商品接口
+    async removeGoods(ctx){
+        try {
+            const res = await removeGoods(ctx.params.id);
+            if(res){
+                ctx.body={
+                    code:0,
+                    message:'删除商品成功',
+                    result:''
+                }
+            }
+        } catch (error) {
+            console.error('删除商品失败',error);
+            return ctx.app.emit('error',removeGoodsError,ctx)
+        }
     }
 }
 

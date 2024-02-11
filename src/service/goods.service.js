@@ -9,37 +9,19 @@ class GoodsService{
         const res = await Goods.create(goods);
         return res.dataValues;
     }
+
     // 更新数据库 商品表
     async updateGoods(id,goods){
-        const res = await Goods.update(goods,{where:{goods_id:id}});
+        const res = await Goods.update(goods,{where:{id}});
         return [false,true][res[0]];
     }
 
+    // 删除数据库 商品表
+    async removeGoods(id){
+        const res = await Goods.destroy({where:{id}});
+        return [false,true][res];
+    }
 
-    async getGoodsList(ctx,next){
-        const {pageNum,pageSize}=ctx.request.query;
-    }
-    async getGoodsById(ctx,next){
-        
-    }
-    async deleteGoodsById(ctx,next){
-        
-    }
-    async uploadGoodsImg(ctx,next){
-        
-    }
-    async createGoodsImg(ctx,next){
-        
-    }
-    async deleteGoodsImg(ctx,next){
-        
-    }
-    async updateGoodsImg(ctx,next){
-        
-    }
-    async getGoodsImgList(ctx,next){
-        
-    }
 }
 
 module.exports=new GoodsService();

@@ -91,5 +91,10 @@ module.exports = {
         code:'10207',
         message:'删除商品失败',
         result:''
+    },
+    restoreGoodsError:{
+        code:'10208',
+        message:'恢复商品失败',
+        result:''
     }
 }

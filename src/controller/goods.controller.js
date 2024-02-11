@@ -1,9 +1,9 @@
 // 引用nodejs核心模块
 const path = require('path');
 // 错误编码模块
-const { fileUploadError,unSupportedFileType,createGoodsError,updateGoodsError,invalidGoodsIDError,removeGoodsError }=require('../constant/err.type');
+const { fileUploadError,unSupportedFileType,createGoodsError,updateGoodsError,invalidGoodsIDError,removeGoodsError,restoreGoodsError}=require('../constant/err.type');
 // 操作数据库service层
-const { createGoods,updateGoods,removeGoods } = require('../service/goods.service');
+const { createGoods,updateGoods,removeGoods,restoreGoods,findAllGoods } = require('../service/goods.service');
 
 class GoodsController{
 
@@ -84,21 +84,64 @@ class GoodsController{
 
     }
 
-    // 硬删除商品接口
+    // 硬删除商品接口  下架商品接口
     async removeGoods(ctx){
-        try {
+        try{
             const res = await removeGoods(ctx.params.id);
             if(res){
                 ctx.body={
                     code:0,
-                    message:'删除商品成功',
+                    message:'下架商品成功',
                     result:''
                 }
+            }else{
+                return ctx.app.emit('error',invalidGoodsIDError,ctx)
             }
         } catch (error) {
             console.error('删除商品失败',error);
             return ctx.app.emit('error',removeGoodsError,ctx)
         }
+    }
+
+    // 上架商品接口
+    async restoreGoods(ctx){
+        try{
+            // 上架具体哪个商品id
+            const res = await restoreGoods(ctx.params.id);
+            if(res){
+                ctx.body={
+                    code:0,
+                    message:'上架商品成功',
+                    result:''
+                }
+            }else{
+                return ctx.app.emit('error',invalidGoodsIDError,ctx)
+            }
+        }catch (error) {
+            console.error('上架商品失败',error);
+            return ctx.app.emit('error',restoreGoodsError,ctx)
+        }
+    }
+
+
+    // 获取所有商品接口
+    async findAllGoods(ctx){
+        // 1.解析pageNum和pageSize
+        const {pageNum = 1,pageSize = 10} = ctx.request.query;
+        // 2.调用数据库的方法，service
+        const res =  await findAllGoods(pageNum,pageSize);
+        // 3.返回结果
+        ctx.body = {
+            code:0,
+            message:'获取所有商品成功',
+            result:res
+        }
+        // try{
+            
+        // }catch(error){
+        //     console.error('获取所有商品失败',error);
+        //     return ctx.app.emit('error',findAllGoodsError,ctx)
+        // }
     }
 }
 

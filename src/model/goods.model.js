@@ -5,7 +5,6 @@ const sq = require('../db/seq');
 
 // 创建数据库表模型
 const Goods = sq.define('zd_goods', {
-
     goods_name: {
         type: DataTypes.STRING,
         allowNull: false,
@@ -27,7 +26,11 @@ const Goods = sq.define('zd_goods', {
         allowNull: false,
         comment:'商品图片的url'
     }
+},{
+    // 是否支持软删除
+    paranoid:true,
 })
+
 // Goods.sync({force: false});
 
 module.exports = Goods;

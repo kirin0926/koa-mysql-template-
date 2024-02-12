@@ -96,5 +96,10 @@ module.exports = {
         code:'10208',
         message:'恢复商品失败',
         result:''
+    },
+    verifyParamsError:{
+        code:'10209',
+        message:'验证参数失败',
+        result:''
     }
 }

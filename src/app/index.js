@@ -31,8 +31,9 @@ app.use( koaBody({
         // uploadDir: os.tmpdir(),
         uploadDir:path.resolve(__dirname, '../upload'),
         // 保持文件的后缀
-        keepExtensions:true
-    }
+        keepExtensions:true,
+    },
+    parsedMethods:['POST','PUT','PATCH','DELETE'],// 将body的数据挂载到request。body对象里
 }) );//处理post请求参数 所有的中间件处理之前  在ctx之前产生一个request对象
 //处理静态资源 路径
 app.use(KoaStatic(path.join(__dirname,'../upload')));

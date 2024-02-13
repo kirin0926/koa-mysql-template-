@@ -101,5 +101,10 @@ module.exports = {
         code:'10209',
         message:'验证参数失败',
         result:''
+    },
+    cartFormatError:{
+        code:'10301',
+        message:'购物车数据格式错误',
+        result:''
     }
 }

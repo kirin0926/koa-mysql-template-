@@ -10,8 +10,8 @@ const { add,findAll,update,remove } = require('../controller/cart.controller')
 
 // 2.实例化router对象
 const router = new Router({prefix: '/carts'});
-// 3.编写路由规则
 
+// 3.编写路由规则
 // 3.1添加到购物车接口 ： auth用户要登陆 中间件校验，格式
 router.post('/',auth,validator({goods_id:'number'}), add)
 

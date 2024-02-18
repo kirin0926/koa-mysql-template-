@@ -1,20 +1,21 @@
 // 1.导入node模块放在最上面
 const path = require('path');
-const os = require('os');
 
 // 2.通过npm or yarn 安装的放在第二部分
+
 // koa框架
 const Koa = require('koa');
-// const { KoaBody } = require('koa-body');//处理post请求参数
-const { koaBody } = require('koa-body');//
+const { koaBody } = require('koa-body');
 const KoaStatic = require('koa-static');//处理静态资源
 const Parameter = require('koa-parameter');//校验方法
-// const cors = require('koa2-cors');//处理跨域
+const cors = require('koa2-cors');//处理跨域
 
 // 3.自己写的放在第三部分
-//错误处理中间件
+
+// 错误处理中间件
 const errHandler = require('./errHandler');
-//加载路由合集
+
+// 加载路由合集
 const router = require('../router');
 
 // 实例化路由
@@ -35,10 +36,24 @@ app.use( koaBody({
     },
     parsedMethods:['POST','PUT','PATCH','DELETE'],// 将body的数据挂载到request。body对象里
 }) );//处理post请求参数 所有的中间件处理之前  在ctx之前产生一个request对象
+
+
+app.use(cors({
+    origin:'*',//
+    exposeHeaders: ['WWW-Authenticate', 'Server-Authorization',''],
+    maxAge: 5,
+    credentials: true,
+    allowMethods: ['GET', 'POST', 'DELETE'],
+    allowHeaders: ['Content-Type', 'Authorization', 'Accept'],
+}));
+
+
 //处理静态资源 路径
 app.use(KoaStatic(path.join(__dirname,'../upload')));
+
 // 校验方法
 app.use(Parameter(app))
+
 //注册路由
 app.use(router.routes()).use(router.allowedMethods());
 

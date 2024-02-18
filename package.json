@@ -11,6 +11,7 @@
   "author": "JJ",
   "license": "ISC",
   "dependencies": {
+    "axios": "^1.6.7",
     "bcryptjs": "^2.4.3",
     "dotenv": "^16.4.1",
     "jsonwebtoken": "^9.0.2",
@@ -19,6 +20,7 @@
     "koa-parameter": "^3.0.1",
     "koa-router": "^10.1.1",
     "koa-static": "^5.0.0",
+    "koa2-cors": "^2.0.6",
     "mysql2": "^3.9.1",
     "node-dev": "^8.0.0",
     "sequelize": "^6.36.0"

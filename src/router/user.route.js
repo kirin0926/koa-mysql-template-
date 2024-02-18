@@ -10,7 +10,7 @@ const { userValidator , verifyUser ,cryptPassword , verifyLogin } = require('../
 const { auth } = require('../middleware/auth.middleware');
 
 // 登陆注册接口 控制器操作数据库内容
-const { register , login , changePassword } = require('../controller/user.controller'); 
+const { register , login , changePassword,Info } = require('../controller/user.controller'); 
 
 // 路由配置默认地址
 const router = new Router({prefix: '/users'});
@@ -29,6 +29,9 @@ router.post('/login',userValidator,verifyLogin, login);
 
 // 修改密码接口 auth身份权限token  cryptPassword用户密码加密  changePassword修改密码
 router.patch('/',auth,cryptPassword, changePassword)
+
+// 获取用户信息接口
+router.get('/info',Info);
 
 // 导出
 module.exports = router;

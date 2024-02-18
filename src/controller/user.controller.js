@@ -44,10 +44,10 @@ class UserController {
         try{
             //  password, ...resUser es6语法 剔除password 剩下的放在res里   从返回结果对象中剔除掉password属性，将剩下的属性放到一个新的对象。
             const {password,...res} = await getUserInfo({user_name});
-            console.log(res,JWT_SECRET_KEY);
+            console.log(res,JWT_SECRET_KEY,'login 登陆 controller');
             ctx.body = {
-                code:0,
-                message:"login ok",
+                code:20000,
+                message:'login ok',
                 result:{
                     // expiresIn 过期时间 1d = 1天      10 = 10秒过期
                     token:jwt.sign(res,JWT_SECRET_KEY,{expiresIn:'1d'}),
@@ -89,6 +89,20 @@ class UserController {
             // 判断用户是否存在 根据id修改password
             // const result = await updateById(id,password);
         // }
+    }
+
+    async Info(ctx,next){
+        // 获取用户信息
+        const {token} = ctx.request.query;
+        console.log(token,'token');
+        ctx.body = {
+            code:20000,
+            message:'获取用户信息成功',
+            result:{
+                name:'admin',
+                avatar:'https://tse2-mm.cn.bing.net/th/id/OIP-C._pY8JRGLX0lPFQVIeSaYJQHaHZ?w=220&h=219&c=7&r=0&o=5&dpr=2&pid=1.7'
+            }
+        }
     }
 
 }

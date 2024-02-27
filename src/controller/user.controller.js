@@ -11,12 +11,12 @@ class UserController {
     // 注册
     async register(ctx, next) {
         // 1.获取数据
-        // console.log(ctx.request);
+        console.log(ctx.request);
         const {user_name,password} = ctx.request.body;
+        console.log(user_name,password);
         // 2.操作数据库
         try{
             // 操作数据库封装了一个service层
-            
             const res = await createUser(user_name,password);
             // console.log(res)
             // 3.返回结果
